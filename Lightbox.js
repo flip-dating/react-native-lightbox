@@ -100,8 +100,8 @@ const Lightbox = (props) => {
       <Animated.View style={{ opacity: layoutOpacity.current }}>
         <TouchableOpacity
           underlayColor={props.underlayColor}
-          onPress={props.onPress}
-          onLongPress={props.onLongPress || open}
+          onPress={open}
+          onLongPress={props.onLongPress}
           activeOpacity={1}
         >
           {props.children}
