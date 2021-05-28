@@ -102,6 +102,7 @@ const Lightbox = (props) => {
           underlayColor={props.underlayColor}
           onPress={props.onPress}
           onLongPress={props.onLongPress || open}
+          activeOpacity={1}
         >
           {props.children}
         </TouchableOpacity>
