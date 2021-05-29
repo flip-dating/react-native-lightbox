@@ -15,6 +15,7 @@ import {
 
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 const WINDOW_WIDTH = Dimensions.get("window").width;
+const DRAG_INIT_THRESHOLD = 50;
 const DRAG_DISMISS_THRESHOLD = 150;
 const isIOS = Platform.OS === "ios";
 
@@ -81,9 +82,13 @@ const LightboxOverlay = (props) => {
         pan.current.setValue(0);
         setIsPanning(true);
       },
-      onPanResponderMove: Animated.event([null, { dy: pan.current }], {
-        useNativeDriver: false,
-      }),
+      onPanResponderMove: (evt, gestureState) => {
+        if (Math.abs(gestureState.dy) > DRAG_INIT_THRESHOLD) {
+          Animated.event([null, { dy: pan.current }], {
+            useNativeDriver: false,
+          })(evt, gestureState)
+        }
+      },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
         if (Math.abs(gestureState.dy) > DRAG_DISMISS_THRESHOLD) {
