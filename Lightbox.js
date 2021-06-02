@@ -95,6 +95,8 @@ const Lightbox = (props) => {
     props.onClose && props.onClose();
   };
 
+  props.getOpen && props.getOpen(open);
+
   return (
     <View ref={_root} style={props.style} onLayout={props.onLayout}>
       <Animated.View style={{ opacity: layoutOpacity.current }}>
@@ -118,6 +120,7 @@ Lightbox.propTypes = {
   renderContent: PropTypes.func,
   underlayColor: PropTypes.string,
   backgroundColor: PropTypes.string,
+  getOpen: PropTypes.func,
   didOpen: PropTypes.func,
   onOpen: PropTypes.func,
   willClose: PropTypes.func,
@@ -133,6 +136,7 @@ Lightbox.propTypes = {
 
 Lightbox.defaultProps = {
   swipeToDismiss: true,
+  getOpen: null,
   onOpen: () => {},
   didOpen: () => {},
   willClose: () => {},
